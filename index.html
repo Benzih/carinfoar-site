@@ -933,7 +933,7 @@
         <details class="legal">
             <summary data-i18n="privacy_summary">Privacy Policy</summary>
             <div class="legal-body" dir="ltr">
-                <p class="legal-meta">Last updated: March 25, 2026</p>
+                <p class="legal-meta">Last updated: September 28, 2026</p>
                 <p class="legal-lang-note" data-i18n-show-when-not="en">📄 Privacy policy is provided in English (the legal record).</p>
 
                 <p>Benzih ("we", "us", or "our") built the <strong>CarInfo AR</strong> app (package: <code>com.carinfo.ar</code>) as a free, ad-supported application with an optional one-time in-app purchase to remove advertisements. This Privacy Policy explains what information the app accesses, how it is used, and the choices you have regarding your data.</p>
@@ -947,7 +947,7 @@
                     </thead>
                     <tbody>
                         <tr><td><strong>Camera feed</strong></td><td>License plate scanning via on-device text recognition</td><td>Processed on-device only. Images are <strong>never</strong> stored, uploaded, or transmitted.</td></tr>
-                        <tr><td><strong>License plate numbers</strong></td><td>Queried against government vehicle databases to retrieve public vehicle information</td><td>Sent to government APIs over HTTPS. <strong>Not</strong> stored on our servers.</td></tr>
+                        <tr><td><strong>License plate numbers</strong></td><td>Queried against government vehicle databases to retrieve public vehicle information</td><td>Sent to government APIs over HTTPS. For countries served from our own copy of the public register (Denmark, Ukraine, and as a backup for Israel and the Netherlands), the plate is <strong>not</strong> sent at all: the app turns it into a file number and downloads that one file. <strong>Not</strong> stored on our servers.</td></tr>
                         <tr><td><strong>Scan history</strong></td><td>Lets you review past lookups</td><td>Stored locally on your device only (max 100 records). Never uploaded.</td></tr>
                         <tr><td><strong>Country &amp; language preferences</strong></td><td>Provides a localized experience</td><td>Stored locally on your device. Never transmitted.</td></tr>
                         <tr><td><strong>Purchase status</strong></td><td>Tracks whether you purchased the ad-free upgrade</td><td>Managed by the App Store / Google Play. A boolean flag is cached locally. No payment details are accessible to the app.</td></tr>
@@ -979,11 +979,12 @@
                             <li>United Kingdom &mdash; <a href="https://www.gov.uk/guidance/vehicle-enquiry-service-api" target="_blank" rel="noopener">DVLA Vehicle Enquiry Service</a></li>
                         </ul>
                     </li>
+                    <li><strong>Our copies of public vehicle registers (Google Cloud Storage)</strong> &mdash; Denmark and Ukraine have no per-plate government service, so the app looks plates up in our own copy of their public registers: Denmark &mdash; Motorstyrelsen (DMR) statistics extract; Ukraine &mdash; &#1052;&#1042;&#1057; &#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1080; / <a href="https://data.gov.ua/dataset/0ffd8b75-0628-48cc-952a-9302f9799ec0" target="_blank" rel="noopener">data.gov.ua</a>, licensed CC BY 4.0. The same kind of copy serves Israel and the Netherlands when the government service does not answer. These copies contain <strong>vehicle data only</strong> (no owner or person data), and the app downloads a file chosen by a number computed from the plate &mdash; the plate itself is not sent. Each result names its source and the date the copy describes.</li>
                 </ul>
 
                 <h3>4. Data Storage &amp; Retention</h3>
                 <ul>
-                    <li><strong>All app data is stored locally on your device.</strong> We do not operate servers that store your data.</li>
+                    <li><strong>All app data is stored locally on your device.</strong> We do not operate servers that store your data. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
                     <li>Scan history is limited to the most recent 100 records and is stored in the app's private storage.</li>
                     <li>You can clear your scan history at any time from within the app.</li>
                     <li>Uninstalling the app removes all locally stored data.</li>
