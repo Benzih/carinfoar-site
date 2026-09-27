@@ -955,7 +955,7 @@
                         <tr><td><strong>Device network / SIM country</strong></td><td>Auto-detects your region for default country selection</td><td>Read on-device only. Never transmitted.</td></tr>
                     </tbody>
                 </table>
-                <p>We do <strong>not</strong> collect personal information such as your name, email address, phone number, or location coordinates. We do not create user profiles or track you across apps.</p>
+                <p>We do <strong>not</strong> collect personal information such as your name, email address, phone number, or location coordinates &mdash; except a phone number you choose to publish with a listing (section 3a). We do not create user profiles or track you across apps.</p>
 
                 <h3>2. How We Use Information</h3>
                 <ul>
@@ -982,9 +982,21 @@
                     <li><strong>Our copies of public vehicle registers (Google Cloud Storage)</strong> &mdash; Denmark and Ukraine have no per-plate government service, so the app looks plates up in our own copy of their public registers: Denmark &mdash; Motorstyrelsen (DMR) statistics extract; Ukraine &mdash; &#1052;&#1042;&#1057; &#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1080; / <a href="https://data.gov.ua/dataset/0ffd8b75-0628-48cc-952a-9302f9799ec0" target="_blank" rel="noopener">data.gov.ua</a>, licensed CC BY 4.0. The same kind of copy serves Israel and the Netherlands when the government service does not answer. These copies contain <strong>vehicle data only</strong> (no owner or person data), and the app downloads a file chosen by a number computed from the plate &mdash; the plate itself is not sent. Each result names its source and the date the copy describes.</li>
                 </ul>
 
+                <h3>3a. Listings &mdash; publishing your car for sale (optional)</h3>
+                <p>If you choose to publish your car from <em>My car</em>, and only then, the following is stored on Google Firebase (Cloud Firestore) and shown to other CarInfo AR users:</p>
+                <ul>
+                    <li><strong>What is shown to everyone using the app:</strong> your car's details from the public registry (make, model, year, fuel), and what you type: price, kilometres, city, and a note.</li>
+                    <li><strong>What is shown only to someone who opens your listing and taps &ldquo;Show contact&rdquo;:</strong> your car's licence plate and the phone number you entered. <strong>The phone number is not verified</strong> &mdash; only enter a number that is yours; you are responsible for it.</li>
+                    <li><strong>Identity:</strong> the app signs in anonymously (a random identifier, no name, e-mail or account) so that only you can delete your listing.</li>
+                    <li><strong>Retention:</strong> a listing and its contact details are deleted automatically 30 days after publishing (the deletion can run up to one day late). You can delete your listing at any time from <em>My car</em>.</li>
+                    <li><strong>Moderation:</strong> listings are checked automatically once a day, including by an AI model we run ourselves; listings that are reported or break the rules are hidden, and their contact details are deleted at once. Reports are stored without being shown to anyone else.</li>
+                    <li><strong>A listing you can no longer reach</strong> (for example after reinstalling the app): write to <a href="mailto:carinfo.ar.app@gmail.com">carinfo.ar.app@gmail.com</a> and we will remove it.</li>
+                    <li>If you never publish, nothing in this section applies to you and nothing is sent.</li>
+                </ul>
+
                 <h3>4. Data Storage &amp; Retention</h3>
                 <ul>
-                    <li><strong>All app data is stored locally on your device.</strong> We do not operate servers that store your data. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
+                    <li><strong>All app data is stored locally on your device</strong>, except a listing you choose to publish (section 3a), which is kept for at most 30 days. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
                     <li>Scan history is limited to the most recent 100 records and is stored in the app's private storage.</li>
                     <li>You can clear your scan history at any time from within the app.</li>
                     <li>Uninstalling the app removes all locally stored data.</li>
@@ -993,7 +1005,7 @@
 
                 <h3>5. Your Rights</h3>
                 <ul>
-                    <li><strong>Access &amp; Deletion:</strong> View or delete your scan history directly within the app settings.</li>
+                    <li><strong>Access &amp; Deletion:</strong> View or delete your scan history directly within the app settings. Delete a published listing from <em>My car</em>, or by e-mail if you can no longer reach it (section 3a).</li>
                     <li><strong>Camera Permission:</strong> You can revoke camera access at any time through your device's system settings.</li>
                     <li><strong>Ad Personalization:</strong> Manage your advertising preferences through your device settings.</li>
                     <li><strong>Uninstall:</strong> Removing the app deletes all associated local data.</li>
