@@ -1383,16 +1383,25 @@
         // Campaign attribution (3.10.2026): our social captions link here with ?utm_source=<network>&utm_medium=..&
         // utm_campaign=.. — copy those onto the Google Play buttons as Play's install referrer, so Play Console
         // (Acquisition -> UTM campaigns) can say which network sent the install. No tags in the URL = links untouched.
-        // App Store campaign links also need Apple's provider token (pt=), so the iOS buttons are left as they are.
+        // iOS: the App Store buttons become App Store Connect's own campaign link, shape copied verbatim from its
+        // generator (Studio, 3.10.2026): /app/apple-store/id…?pt=1112650&ct=<campaign>&mt=8 — ct = utm_source, ≤30 chars.
         (function () {
             try {
                 var q = new URLSearchParams(window.location.search);
                 var parts = [];
+                var good = {};
                 ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) {
                     var v = q.get(k);
-                    if (v && /^[A-Za-z0-9_.-]{1,40}$/.test(v)) parts.push(k + '=' + v);
+                    if (v && /^[A-Za-z0-9_.-]{1,40}$/.test(v)) { parts.push(k + '=' + v); good[k] = v; }
                 });
                 if (!parts.length) return;
+                if (good.utm_source) {
+                    var ios = 'https://apps.apple.com/app/apple-store/id6766014838?pt=1112650&ct=' +
+                              encodeURIComponent(good.utm_source.slice(0, 30)) + '&mt=8';
+                    document.querySelectorAll('a.badge-ios').forEach(function (a) {
+                        if ((a.getAttribute('href') || '').indexOf('apps.apple.com/app/id6766014838') !== -1) a.setAttribute('href', ios);
+                    });
+                }
                 var referrer = encodeURIComponent(parts.join('&'));
                 document.querySelectorAll('a.badge-android').forEach(function (a) {
                     var href = a.getAttribute('href') || '';
