@@ -1379,5 +1379,28 @@
             document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { io.observe(el); });
         })();
     </script>
+    <script>
+        // Campaign attribution (3.10.2026): our social captions link here with ?utm_source=<network>&utm_medium=..&
+        // utm_campaign=.. — copy those onto the Google Play buttons as Play's install referrer, so Play Console
+        // (Acquisition -> UTM campaigns) can say which network sent the install. No tags in the URL = links untouched.
+        // App Store campaign links also need Apple's provider token (pt=), so the iOS buttons are left as they are.
+        (function () {
+            try {
+                var q = new URLSearchParams(window.location.search);
+                var parts = [];
+                ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) {
+                    var v = q.get(k);
+                    if (v && /^[A-Za-z0-9_.-]{1,40}$/.test(v)) parts.push(k + '=' + v);
+                });
+                if (!parts.length) return;
+                var referrer = encodeURIComponent(parts.join('&'));
+                document.querySelectorAll('a.badge-android').forEach(function (a) {
+                    var href = a.getAttribute('href') || '';
+                    if (href.indexOf('play.google.com/store/apps/details') === -1 || href.indexOf('referrer=') !== -1) return;
+                    a.setAttribute('href', href + (href.indexOf('?') === -1 ? '?' : '&') + 'referrer=' + referrer);
+                });
+            } catch (e) { /* never break the page for analytics */ }
+        })();
+    </script>
 </body>
 </html>
