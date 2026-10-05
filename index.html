@@ -1411,5 +1411,49 @@
             } catch (e) { /* never break the page for analytics */ }
         })();
     </script>
+    <script>
+        // Visit counter (5.10.2026). Benzi approved «a small counter, no cookies, no personal data, that counts only
+        // entries and clicks on the store buttons, so we know which network sends people». Each event is ONE
+        // Firestore document {d: UTC day, s: source network, e: view|android|ios} — nothing else is sent or stored
+        // (no cookie, no storage, no id; the rules in CarInfoAR/firebase/firestore.rules refuse any other key).
+        // The key is carinfo-ar's public client key, from the app's google-services.json — not a secret.
+        (function () {
+            try {
+                var URL_ = 'https://firestore.googleapis.com/v1/projects/carinfo-ar/databases/(default)/documents/site_hits?key=AIzaSyA-CWCDQ2SrBOucNoqMQ60zCbLzWu80K7o';
+                var KNOWN = ['threads', 'x', 'facebook', 'bluesky', 'pinterest', 'tumblr', 'instagram', 'tiktok', 'youtube'];
+                var src = 'none';
+                try {
+                    var raw = new URLSearchParams(window.location.search).get('utm_source');
+                    if (raw) {
+                        raw = raw.toLowerCase();
+                        src = KNOWN.indexOf(raw) !== -1 ? raw : 'other';
+                    }
+                } catch (e) { src = 'none'; }
+                var send = function (ev) {
+                    try {
+                        var body = JSON.stringify({ fields: {
+                            d: { stringValue: new Date().toISOString().slice(0, 10) },
+                            s: { stringValue: src },
+                            e: { stringValue: ev }
+                        } });
+                        var opts = { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: body };
+                        var p;
+                        try { p = fetch(URL_, opts); } catch (e) { p = null; }
+                        // a browser that refuses keepalive (old engines) gets a plain request instead
+                        if (!p) { opts.keepalive = false; p = fetch(URL_, opts); }
+                        if (p && p.catch) p.catch(function () {});
+                    } catch (e) { /* never break the page for analytics */ }
+                };
+                send('view');
+                // capture phase, never preventDefault: the store link opens exactly as before and never waits
+                document.addEventListener('click', function (ev) {
+                    try {
+                        var a = ev.target && ev.target.closest ? ev.target.closest('a.badge-android, a.badge-ios') : null;
+                        if (a) send(a.classList.contains('badge-ios') ? 'ios' : 'android');
+                    } catch (e) { /* never break the page for analytics */ }
+                }, true);
+            } catch (e) { /* never break the page for analytics */ }
+        })();
+    </script>
 </body>
 </html>
