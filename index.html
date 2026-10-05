@@ -933,7 +933,7 @@
         <details class="legal">
             <summary data-i18n="privacy_summary">Privacy Policy</summary>
             <div class="legal-body" dir="ltr">
-                <p class="legal-meta">Last updated: September 28, 2026</p>
+                <p class="legal-meta">Last updated: October 5, 2026</p>
                 <p class="legal-lang-note" data-i18n-show-when-not="en">📄 Privacy policy is provided in English (the legal record).</p>
 
                 <p>Benzih ("we", "us", or "our") built the <strong>CarInfo AR</strong> app (package: <code>com.carinfo.ar</code>) as a free, ad-supported application with an optional one-time in-app purchase to remove advertisements. This Privacy Policy explains what information the app accesses, how it is used, and the choices you have regarding your data.</p>
@@ -1012,6 +1012,9 @@
                     <li><strong>We are not a party to the sale.</strong> CarInfo AR shows listings; it does not check the cars, the sellers or the buyers, and is not responsible for any deal made through a listing. Check a car and its documents before you pay.</li>
                     <li><strong>Abuse contact:</strong> <a href="mailto:carinfo.ar.app@gmail.com">carinfo.ar.app@gmail.com</a> &mdash; for a listing that uses your number, a listing you can no longer reach, or anything else that breaks these rules.</li>
                 </ul>
+
+                <h3>3c. This website (carinfoar.com)</h3>
+                <p>The website sets no cookies and uses no analytics SDK. When you open the page or tap a store button, the page sends one anonymous count to our Google Firebase database: the date, the social network named in the link you came from (if any), and whether it was a page view or a tap on the Google Play or App Store button. No IP address, device identifier or other personal data is stored. The site is hosted on GitHub Pages and loads the store badges from Google; those services receive your IP address to serve the request, under their own privacy policies.</p>
 
                 <h3>4. Data Storage &amp; Retention</h3>
                 <ul>
@@ -1419,7 +1422,7 @@
         // The key is carinfo-ar's public client key, from the app's google-services.json — not a secret.
         (function () {
             try {
-                var URL_ = 'https://firestore.googleapis.com/v1/projects/carinfo-ar/databases/(default)/documents/site_hits?key=AIzaSyA-CWCDQ2SrBOucNoqMQ60zCbLzWu80K7o';
+                var URL_ = 'https://firestore.googleapis.com/v1/projects/carinfo-ar/databases/(default)/documents/site_hits?key=AIzaSyDRrk0V6kwN52bIuEuZP4tH6OWvq71aCK8';
                 var KNOWN = ['threads', 'x', 'facebook', 'bluesky', 'pinterest', 'tumblr', 'instagram', 'tiktok', 'youtube'];
                 var src = 'none';
                 try {
@@ -1431,16 +1434,23 @@
                 } catch (e) { src = 'none'; }
                 var send = function (ev) {
                     try {
+                        var d = new Date().toISOString().slice(0, 10);
+                        // ID = <d>_<s>_<e>_<5 random digits>: the rules refuse a reused ID, which caps a flood
+                        // at 100,000 docs per (day, source, event) (panel 5.10)
+                        var id = d + '_' + src + '_' + ev + '_' + String(Math.floor(Math.random() * 100000) + 100000).slice(1);
                         var body = JSON.stringify({ fields: {
-                            d: { stringValue: new Date().toISOString().slice(0, 10) },
+                            d: { stringValue: d },
                             s: { stringValue: src },
                             e: { stringValue: ev }
                         } });
-                        var opts = { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: body };
+                        // no Content-Type header: the body goes as text/plain, a simple request with no CORS preflight
+                        // (Firestore REST accepts it - measured live 5.10)
+                        var opts = { method: 'POST', keepalive: true, body: body };
                         var p;
-                        try { p = fetch(URL_, opts); } catch (e) { p = null; }
+                        var url = URL_ + '&documentId=' + id;
+                        try { p = fetch(url, opts); } catch (e) { p = null; }
                         // a browser that refuses keepalive (old engines) gets a plain request instead
-                        if (!p) { opts.keepalive = false; p = fetch(URL_, opts); }
+                        if (!p) { opts.keepalive = false; p = fetch(url, opts); }
                         if (p && p.catch) p.catch(function () {});
                     } catch (e) { /* never break the page for analytics */ }
                 };
