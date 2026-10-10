@@ -949,7 +949,9 @@
                         <tr><td><strong>Camera feed</strong></td><td>License plate scanning via on-device text recognition</td><td>Processed on-device only. Images are <strong>never</strong> stored, uploaded, or transmitted.</td></tr>
                         <tr><td><strong>License plate numbers</strong></td><td>Queried against government vehicle databases to retrieve public vehicle information</td><td>Sent to government APIs over HTTPS. For countries served from our own copy of the public register (Denmark, Ukraine, and as a backup for Israel and the Netherlands), the plate is <strong>not</strong> sent at all: the app turns it into a file number and downloads that one file. <strong>Not</strong> stored on our servers.</td></tr>
                         <tr><td><strong>Scan history</strong></td><td>Lets you review past lookups</td><td>Stored locally on your device only (max 100 records). Never uploaded.</td></tr>
-                        <tr><td><strong>Country &amp; language preferences</strong></td><td>Provides a localized experience</td><td>Stored locally on your device. Never transmitted.</td></tr>
+                        <tr><td><strong>Country &amp; language preferences</strong></td><td>Provides a localized experience</td><td>Stored locally on your device. The selected region and the app's language are also part of the app status below.</td></tr>
+                        <tr><td><strong>Anonymous app ID &amp; app status</strong></td><td>Lets us send you a message inside the app (for example about your listing) and see how many people are using the app</td><td>When you open the app it gets a random anonymous ID (Firebase Authentication, no sign-up). While the app is open it reports, every few minutes, to Google Firebase (EU): that ID, iPhone or Android, the selected region, the app's language, the app version, whether the app is open, and when it was last open. No name, phone number, e-mail or location. Deleted after 90 days without use.</td></tr>
+                        <tr><td><strong>Messages from us</strong></td><td>A short message shown once inside the app</td><td>Stored in Google Firebase (EU) under your anonymous ID, with the time you read it.</td></tr>
                         <tr><td><strong>Purchase status</strong></td><td>Tracks whether you purchased the ad-free upgrade</td><td>Managed by the App Store / Google Play. A boolean flag is cached locally. No payment details are accessible to the app.</td></tr>
                         <tr><td><strong>Crash reports</strong></td><td>Helps us fix bugs and improve stability</td><td>Sent to Firebase Crashlytics. Contains stack traces, device model, OS version. No personal data.</td></tr>
                         <tr><td><strong>Device network / SIM country</strong></td><td>Auto-detects your region for default country selection</td><td>Read on-device only. Never transmitted.</td></tr>
@@ -963,6 +965,7 @@
                     <li><strong>Detected plate numbers</strong> are sent to the relevant government vehicle API (based on your selected country) to retrieve publicly available vehicle information.</li>
                     <li><strong>Scan history</strong> is maintained locally so you can revisit previous lookups without re-scanning.</li>
                     <li><strong>Preferences</strong> are stored locally to remember your chosen country and language settings between sessions.</li>
+                    <li><strong>App status</strong> (anonymous ID, platform, region, language, version, when the app was open) is used to reach you with a message inside the app and to keep the service working. Legal basis: our legitimate interest in supporting the people who use the app and in running the service. It is never used for advertising and never linked to your name or phone.</li>
                 </ul>
 
                 <h3>3. Third-Party Services</h3>
@@ -1015,7 +1018,7 @@
 
                 <h3>4. Data Storage &amp; Retention</h3>
                 <ul>
-                    <li><strong>All app data is stored locally on your device</strong>, except a listing you choose to publish (section 3a), which is kept for at most 30 days. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
+                    <li><strong>All app data is stored locally on your device</strong>, except a listing you choose to publish (section 3a), which is kept for at most 30 days, and the anonymous app status and messages from us (section 1), deleted after 90 days without use. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
                     <li>Scan history is limited to the most recent 100 records and is stored in the app's private storage.</li>
                     <li>You can clear your scan history at any time from within the app.</li>
                     <li>Uninstalling the app removes all locally stored data.</li>
@@ -1027,6 +1030,7 @@
                     <li><strong>Access &amp; Deletion:</strong> View or delete your scan history directly within the app settings. Delete a published listing from <em>My car</em>, or by e-mail if you can no longer reach it (section 3a).</li>
                     <li><strong>Camera Permission:</strong> You can revoke camera access at any time through your device's system settings.</li>
                     <li><strong>Ad Personalization:</strong> Manage your advertising preferences through your device settings.</li>
+                    <li><strong>App status &amp; messages:</strong> write to carinfo.ar.app@gmail.com and we delete them. They also stop when you uninstall the app and are deleted after 90 days without use.</li>
                     <li><strong>Uninstall:</strong> Removing the app deletes all associated local data.</li>
                 </ul>
 
