@@ -922,7 +922,7 @@
             <details>
                 <summary data-i18n="faq_q_privacy">What does the app know about me?</summary>
                 <div>
-                    <p data-i18n="faq_a_privacy">Camera frames are processed entirely on-device and never leave your phone. The only thing that leaves the device is the plate text, sent to the relevant government registry over HTTPS. There are no accounts, no tracking, and no analytics on your scans. Full details in the <a href="#privacy" data-i18n="faq_a_privacy_link">privacy policy</a>.</p>
+                    <p data-i18n="faq_a_privacy">Camera frames are processed entirely on-device and never leave your phone. The plate text is sent to the relevant government registry over HTTPS and is not stored by us. So that we can send you a message inside the app, the app has a random anonymous ID and tells us when it is open, with your region, language and app version &mdash; no name, phone, e-mail or location, no tracking across apps, and no analytics on your scans. Full details in the <a href="#privacy" data-i18n="faq_a_privacy_link">privacy policy</a>.</p>
                 </div>
             </details>
         </div>
@@ -949,10 +949,12 @@
                         <tr><td><strong>Camera feed</strong></td><td>License plate scanning via on-device text recognition</td><td>Processed on-device only. Images are <strong>never</strong> stored, uploaded, or transmitted.</td></tr>
                         <tr><td><strong>License plate numbers</strong></td><td>Queried against government vehicle databases to retrieve public vehicle information</td><td>Sent to government APIs over HTTPS. For countries served from our own copy of the public register (Denmark, Ukraine, and as a backup for Israel and the Netherlands), the plate is <strong>not</strong> sent at all: the app turns it into a file number and downloads that one file. <strong>Not</strong> stored on our servers.</td></tr>
                         <tr><td><strong>Scan history</strong></td><td>Lets you review past lookups</td><td>Stored locally on your device only (max 100 records). Never uploaded.</td></tr>
-                        <tr><td><strong>Country &amp; language preferences</strong></td><td>Provides a localized experience</td><td>Stored locally on your device. Never transmitted.</td></tr>
+                        <tr><td><strong>Country &amp; language preferences</strong></td><td>Provides a localized experience</td><td>Stored locally on your device. The selected region and the app's language are also part of the app status below.</td></tr>
+                        <tr><td><strong>Anonymous app ID &amp; app status</strong></td><td>Lets us send you a message inside the app (for example about your listing) and see how many people are using the app</td><td>When you open the app it gets a random anonymous ID (Firebase Authentication, no sign-up). While the app is open it reports, every few minutes, to Google Firebase (EU): that ID, iPhone or Android, the selected region, the app's language, the app version, whether the app is open, and when it was last open. No name, phone number, e-mail or location. Deleted after 90 days without use.</td></tr>
+                        <tr><td><strong>Messages from us</strong></td><td>A short message shown once inside the app</td><td>Stored in Google Firebase (EU) under your anonymous ID, with the time you read it.</td></tr>
                         <tr><td><strong>Purchase status</strong></td><td>Tracks whether you purchased the ad-free upgrade</td><td>Managed by the App Store / Google Play. A boolean flag is cached locally. No payment details are accessible to the app.</td></tr>
                         <tr><td><strong>Crash reports</strong></td><td>Helps us fix bugs and improve stability</td><td>Sent to Firebase Crashlytics. Contains stack traces, device model, OS version. No personal data.</td></tr>
-                        <tr><td><strong>Device network / SIM country</strong></td><td>Auto-detects your region for default country selection</td><td>Read on-device only. Never transmitted.</td></tr>
+                        <tr><td><strong>Device network / SIM country</strong></td><td>Auto-detects your region for default country selection</td><td>Read on-device. Never transmitted itself; the region chosen from it is part of the app status below.</td></tr>
                     </tbody>
                 </table>
                 <p>We do <strong>not</strong> collect personal information such as your name, email address, phone number, or location coordinates &mdash; except a phone number you choose to publish with a listing (section 3a). We do not create user profiles or track you across apps.</p>
@@ -963,6 +965,7 @@
                     <li><strong>Detected plate numbers</strong> are sent to the relevant government vehicle API (based on your selected country) to retrieve publicly available vehicle information.</li>
                     <li><strong>Scan history</strong> is maintained locally so you can revisit previous lookups without re-scanning.</li>
                     <li><strong>Preferences</strong> are stored locally to remember your chosen country and language settings between sessions.</li>
+                    <li><strong>App status</strong> (anonymous ID, platform, region, language, version, when the app was open) is used to reach you with a message inside the app and to keep the service working. Legal basis: our legitimate interest in supporting the people who use the app and in running the service. It is never used for advertising and never linked to your name or phone.</li>
                 </ul>
 
                 <h3>3. Third-Party Services</h3>
@@ -985,14 +988,15 @@
                 <h3>3a. Listings &mdash; publishing your car for sale (optional)</h3>
                 <p>If you choose to publish your car from <em>My car</em>, and only then, the following is stored on Google Firebase (Cloud Firestore) and shown to other CarInfo AR users:</p>
                 <ul>
-                    <li><strong>What is shown to everyone using the app:</strong> your car's details from the public registry (make, model, year, fuel), and what you type: price, kilometres, city, a note, and any photos you add.</li>
+                    <li><strong>What is shown to everyone using the app:</strong> your car's details from the public registry (make, model, year, fuel), and what you enter: price, kilometres, the area you choose from a list (for example a district), a city, a note, and any photos you add.</li>
                     <li><strong>Photos (optional, up to 5):</strong> shown to everyone with your listing. Before a photo leaves your phone, the app redraws it from its pixels, which removes the location, time and camera details stored in the original file, and blurs any licence plate it can read. The blurring is automatic and can miss a plate &mdash; check your photos before you publish. Photos are stored on Google Firebase (Cloud Storage, in the EU) and deleted together with your listing, and in any case within 32 days.</li>
                     <li><strong>Where a photo was taken (fraud checks only):</strong> the app may keep the name of the city a photo was taken in, worked out on your phone from the original photo by your phone&rsquo;s own location service (Google on Android, Apple on iPhone); the exact position is never sent to us or stored. It is not shown to anyone and is deleted with the listing.</li>
                     <li><strong>What is shown only to someone who opens your listing and taps &ldquo;Show contact&rdquo;:</strong> your car's licence plate and the phone number you entered. <strong>The phone number is not verified</strong> &mdash; only enter a number that is yours; you are responsible for it.</li>
-                    <li><strong>Identity:</strong> the app signs in anonymously (a random identifier, no name, e-mail or account) so that only you can delete your listing.</li>
+                    <li><strong>Identity:</strong> your listing is tied to the app&rsquo;s anonymous ID (section 1 &mdash; a random identifier, no name, e-mail or account), so that only you can delete it.</li>
                     <li><strong>Blocking abuse:</strong> each listing also stores a one-way code made from an identifier of your device (the identifier itself never leaves your phone). It is not shown to anyone and is deleted with the listing. If a device keeps posting abusive or false listings, we can block that code so the app can no longer publish from that device; a blocked code is kept until we lift the block.</li>
-                    <li><strong>Retention:</strong> a listing, its photos and its contact details are deleted automatically 30 days after publishing (the deletion can run up to one day late). You can delete your listing at any time from <em>My car</em>.</li>
-                    <li><strong>Moderation:</strong> listings are checked automatically once a day, including by an AI model we run ourselves; listings that are reported or break the rules are hidden, and their contact details and photos are deleted. Reports are stored without being shown to anyone else.</li>
+                    <li><strong>Retention:</strong> a listing, its photos and its contact details are deleted automatically 30 days after publishing (the deletion can run up to one day late), except the private copy described next. You can delete your listing at any time from <em>My car</em>.</li>
+                    <li><strong>Your phone number, kept up to 6 months:</strong> we keep a private copy of the phone number and licence plate you entered, with the car&rsquo;s make and model, for up to 6 months after publishing &mdash; also after the listing ends &mdash; only to contact you about your listing (for example if it was removed by mistake). It is never shown to anyone and never used for advertising. <em>Delete my contact details</em> in <em>My car</em> deletes it, or write to <a href="mailto:carinfo.ar.app@gmail.com">carinfo.ar.app@gmail.com</a>.</li>
+                    <li><strong>Moderation:</strong> listings are checked automatically once a day, including by an AI model we run ourselves; listings that are reported or break the rules are hidden. A hidden listing keeps its details, so a mistaken hide can be undone, and is deleted with the listing after 30 days. Reports are stored without being shown to anyone else.</li>
                     <li><strong>A listing you can no longer reach</strong> (for example after reinstalling the app): write to <a href="mailto:carinfo.ar.app@gmail.com">carinfo.ar.app@gmail.com</a> and we will remove it.</li>
                     <li>If you never publish, nothing in this section applies to you and nothing is sent.</li>
                 </ul>
@@ -1018,7 +1022,7 @@
 
                 <h3>4. Data Storage &amp; Retention</h3>
                 <ul>
-                    <li><strong>All app data is stored locally on your device</strong>, except a listing you choose to publish (section 3a), which is kept for at most 30 days. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
+                    <li><strong>All app data is stored locally on your device</strong>, except a listing you choose to publish (section 3a), which is kept for at most 30 days, and the anonymous app status and messages from us (section 1), deleted after 90 days without use. The anonymous ID itself remains a record in Firebase Authentication that holds only when it was created and last used. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
                     <li>Scan history is limited to the most recent 100 records and is stored in the app's private storage.</li>
                     <li>You can clear your scan history at any time from within the app.</li>
                     <li>Uninstalling the app removes all locally stored data.</li>
@@ -1030,6 +1034,7 @@
                     <li><strong>Access &amp; Deletion:</strong> View or delete your scan history directly within the app settings. Delete a published listing from <em>My car</em>, or by e-mail if you can no longer reach it (section 3a).</li>
                     <li><strong>Camera Permission:</strong> You can revoke camera access at any time through your device's system settings.</li>
                     <li><strong>Ad Personalization:</strong> Manage your advertising preferences through your device settings.</li>
+                    <li><strong>App status &amp; messages:</strong> write to carinfo.ar.app@gmail.com and we delete them. They also stop when you uninstall the app and are deleted after 90 days without use.</li>
                     <li><strong>Uninstall:</strong> Removing the app deletes all associated local data.</li>
                 </ul>
 
@@ -1110,7 +1115,7 @@
                 faq_q_restore: 'I bought "Remove ads" but the ads are still showing.',
                 faq_a_restore: "Open Settings → Premium and tap the row again. The receipt is restored automatically on every launch via Apple/Google's standard restore flow. If you still see ads after a fresh launch, email us with your purchase receipt and we'll fix it.",
                 faq_q_privacy: 'What does the app know about me?',
-                faq_a_privacy: 'Camera frames are processed entirely on-device and never leave your phone. The only thing that leaves the device is the plate text, sent to the relevant government registry over HTTPS. There are no accounts, no tracking, and no analytics on your scans. Full details in the <a href="#privacy">privacy policy</a>.',
+                faq_a_privacy: 'Camera frames are processed entirely on-device and never leave your phone. The plate text is sent to the relevant government registry over HTTPS and is not stored by us. So that we can send you a message inside the app, the app has a random anonymous ID and tells us when it is open, with your region, language and app version &mdash; no name, phone, e-mail or location, no tracking across apps, and no analytics on your scans. Full details in the <a href="#privacy">privacy policy</a>.',
                 privacy_summary: 'Privacy Policy',
                 footer_rights: '© 2026 Benzi Heler. All rights reserved.',
                 footer_tagline: 'CarInfo AR — Vehicle information via Augmented Reality'
@@ -1167,7 +1172,7 @@
                 faq_q_restore: 'קניתי "הסרת מודעות" אבל המודעות עדיין מופיעות.',
                 faq_a_restore: 'פתחו הגדרות ← Premium והקישו על השורה שוב. הקבלה משוחזרת אוטומטית בכל הפעלה דרך זרימת השחזור הסטנדרטית של Apple/Google. אם אתם עדיין רואים מודעות אחרי הפעלה מחדש, שלחו לנו את הקבלה ונטפל בזה.',
                 faq_q_privacy: 'מה האפליקציה יודעת עליי?',
-                faq_a_privacy: 'תמונות מהמצלמה מעובדות לחלוטין על המכשיר ולא יוצאות מהטלפון. הדבר היחיד שיוצא מהמכשיר הוא טקסט הלוחית, שנשלח למאגר הממשלתי הרלוונטי דרך HTTPS. אין חשבונות, אין מעקב ואין איסוף נתונים על הסריקות שלכם. פרטים מלאים ב<a href="#privacy">מדיניות הפרטיות</a>.',
+                faq_a_privacy: 'תמונות מהמצלמה מעובדות לחלוטין על המכשיר ולא יוצאות מהטלפון. טקסט הלוחית נשלח למאגר הממשלתי הרלוונטי דרך HTTPS ואינו נשמר אצלנו. כדי שנוכל לשלוח לכם הודעה בתוך האפליקציה, לאפליקציה יש מזהה אנונימי אקראי והיא מדווחת לנו מתי היא פתוחה, עם האזור, השפה וגרסת האפליקציה — בלי שם, טלפון, מייל או מיקום, בלי מעקב בין אפליקציות ובלי איסוף נתונים על הסריקות שלכם. פרטים מלאים ב<a href="#privacy">מדיניות הפרטיות</a>.',
                 privacy_summary: 'מדיניות פרטיות',
                 footer_rights: '© 2026 Benzi Heler. כל הזכויות שמורות.',
                 footer_tagline: 'CarInfo AR — מידע על רכב באמצעות מציאות רבודה'
@@ -1224,7 +1229,7 @@
                 faq_q_restore: 'اشتريت "إزالة الإعلانات" لكنها لا تزال تظهر.',
                 faq_a_restore: 'افتح الإعدادات ← Premium واضغط على الصف مرة أخرى. تتم استعادة الإيصال تلقائيًا في كل تشغيل عبر تدفق الاستعادة القياسي من Apple/Google. إذا لا تزال ترى الإعلانات بعد إعادة التشغيل، راسلنا مع إيصال الشراء وسنصلح ذلك.',
                 faq_q_privacy: 'ماذا يعرف التطبيق عني؟',
-                faq_a_privacy: 'تتم معالجة إطارات الكاميرا بالكامل على الجهاز ولا تغادر هاتفك أبدًا. الشيء الوحيد الذي يغادر الجهاز هو نص اللوحة، ويُرسل إلى السجل الحكومي ذي الصلة عبر HTTPS. لا توجد حسابات ولا تعقب ولا تحليلات على عمليات المسح الخاصة بك. التفاصيل الكاملة في <a href="#privacy">سياسة الخصوصية</a>.',
+                faq_a_privacy: 'تتم معالجة إطارات الكاميرا بالكامل على الجهاز ولا تغادر هاتفك أبدًا. يُرسل نص اللوحة إلى السجل الحكومي ذي الصلة عبر HTTPS ولا نحتفظ به. لكي نتمكن من إرسال رسالة إليك داخل التطبيق، يحمل التطبيق معرّفًا مجهولًا عشوائيًا ويخبرنا متى يكون مفتوحًا، مع منطقتك ولغتك وإصدار التطبيق — بلا اسم أو هاتف أو بريد إلكتروني أو موقع، وبلا تعقب بين التطبيقات، وبلا تحليلات على عمليات المسح الخاصة بك. التفاصيل الكاملة في <a href="#privacy">سياسة الخصوصية</a>.',
                 privacy_summary: 'سياسة الخصوصية',
                 footer_rights: '© 2026 Benzi Heler. جميع الحقوق محفوظة.',
                 footer_tagline: 'CarInfo AR — معلومات السيارات عبر الواقع المعزز'
@@ -1281,7 +1286,7 @@
                 faq_q_restore: 'Ik heb "Verwijder advertenties" gekocht, maar de advertenties verschijnen nog steeds.',
                 faq_a_restore: 'Open Instellingen → Premium en tik nogmaals op de rij. De aankoopbon wordt automatisch hersteld bij elke start via de standaard hersteltools van Apple/Google. Zie je nog steeds advertenties na een verse herstart, mail ons je aankoopbon dan lossen we het op.',
                 faq_q_privacy: 'Wat weet de app over mij?',
-                faq_a_privacy: 'Camerabeelden worden volledig op het apparaat verwerkt en verlaten je telefoon nooit. Het enige wat het apparaat verlaat is de kentekentekst, verzonden naar het relevante overheidsregister via HTTPS. Geen accounts, geen tracking en geen analytics op je scans. Volledige details in het <a href="#privacy">privacybeleid</a>.',
+                faq_a_privacy: 'Camerabeelden worden volledig op het apparaat verwerkt en verlaten je telefoon nooit. De kentekentekst gaat via HTTPS naar het relevante overheidsregister en wordt niet door ons bewaard. Zodat we je een bericht in de app kunnen sturen, heeft de app een willekeurige anonieme ID en laat ons weten wanneer hij open is, met je regio, taal en app-versie &mdash; geen naam, telefoon, e-mail of locatie, geen tracking over apps heen en geen analytics op je scans. Volledige details in het <a href="#privacy">privacybeleid</a>.',
                 privacy_summary: 'Privacybeleid',
                 footer_rights: '© 2026 Benzi Heler. Alle rechten voorbehouden.',
                 footer_tagline: 'CarInfo AR — Voertuiginformatie via Augmented Reality'
