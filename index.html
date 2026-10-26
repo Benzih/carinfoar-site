@@ -940,7 +940,7 @@
                 <p>By using CarInfo AR you agree to the practices described in this policy. If you do not agree, please do not use the app.</p>
 
                 <h3>1. Information We Collect</h3>
-                <p>CarInfo AR is designed with privacy in mind. We do <strong>not</strong> require user accounts, logins, or any form of personal registration. Below is a complete overview of the data the app accesses:</p>
+                <p>CarInfo AR is designed with privacy in mind. Using the app needs <strong>no</strong> account, login or registration. Only car dealers who choose to register create an account (section 3e). Below is a complete overview of the data the app accesses:</p>
                 <table>
                     <thead>
                         <tr><th>Data</th><th>Purpose</th><th>Stored / Transmitted</th></tr>
@@ -949,6 +949,7 @@
                         <tr><td><strong>Camera feed</strong></td><td>License plate scanning via on-device text recognition</td><td>Processed on-device only. Images are <strong>never</strong> stored, uploaded, or transmitted.</td></tr>
                         <tr><td><strong>License plate numbers</strong></td><td>Queried against government vehicle databases to retrieve public vehicle information</td><td>Sent to government APIs over HTTPS. For countries served from our own copy of the public register (Denmark, Ukraine, and as a backup for Israel and the Netherlands), the plate is <strong>not</strong> sent at all: the app turns it into a file number and downloads that one file. <strong>Not</strong> stored on our servers.</td></tr>
                         <tr><td><strong>Scan history</strong></td><td>Lets you review past lookups</td><td>Stored locally on your device only (max 100 records). Never uploaded.</td></tr>
+                        <tr><td><strong>Parked-car location (only if you use &ldquo;Set location&rdquo;)</strong></td><td>Lets you save where a car is parked and navigate back to it</td><td>Your phone&rsquo;s position is read once, when you tap the button, and saved <strong>only on your phone</strong>. It is never sent to us. It leaves your phone only if you tap &ldquo;Share&rdquo; and choose an app to send it with. Removing the spot, or uninstalling the app, deletes it.</td></tr>
                         <tr><td><strong>Country &amp; language preferences</strong></td><td>Provides a localized experience</td><td>Stored locally on your device. The selected region and the app's language are also part of the app status below.</td></tr>
                         <tr><td><strong>Anonymous app ID &amp; app status</strong></td><td>Lets us send you a message inside the app (for example about your listing) and see how many people are using the app</td><td>When you open the app it gets a random anonymous ID (Firebase Authentication, no sign-up). While the app is open it reports, every few minutes, to Google Firebase (EU): that ID, iPhone or Android, the selected region, the app's language, the app version, whether the app is open, and when it was last open. No name, phone number, e-mail or location. Deleted after 90 days without use.</td></tr>
                         <tr><td><strong>Messages from us</strong></td><td>A short message shown once inside the app</td><td>Stored in Google Firebase (EU) under your anonymous ID, with the time you read it.</td></tr>
@@ -959,7 +960,7 @@
                         <tr><td><strong>Device network / SIM country</strong></td><td>Auto-detects your region for default country selection</td><td>Read on-device. Never transmitted itself; the region chosen from it is part of the app status below.</td></tr>
                     </tbody>
                 </table>
-                <p>We do <strong>not</strong> collect personal information such as your name, email address, phone number, or location coordinates &mdash; except a phone number, and a name if you add one, that you choose to publish with a listing (section 3a), and the messages and optional name you choose to send to another user (section 3d). We do not create user profiles or track you across apps.</p>
+                <p>We do <strong>not</strong> collect personal information such as your name, email address, phone number, or location coordinates &mdash; except a phone number, and a name if you add one, that you choose to publish with a listing (section 3a), the messages and optional name you choose to send to another user (section 3d), and &mdash; only if you register as a dealer &mdash; the e-mail address and business name of your dealer account (section 3e). A parked-car location you save stays on your phone. We do not create user profiles or track you across apps.</p>
 
                 <h3>2. How We Use Information</h3>
                 <ul>
@@ -1007,7 +1008,7 @@
                 <h3 id="listing-rules">3b. Listing rules (terms of use for publishing)</h3>
                 <p>By tapping &ldquo;I agree&rdquo; before your first listing, you accept these rules. They apply to everything you publish and to how you use other people&rsquo;s listings.</p>
                 <ul>
-                    <li><strong>Only your own car, for sale, by you.</strong> Publish only a vehicle you own or are entitled to sell. No ads for other goods or services, jobs, loans, dealers&rsquo; stock lists or anything that is not a private car for sale.</li>
+                    <li><strong>Only your own car, for sale, by you.</strong> Publish only a vehicle you own or are entitled to sell. No ads for other goods or services, jobs, loans or anything that is not a car for sale. Dealers publish through a dealer account (section 3e).</li>
                     <li><strong>Only your own phone number.</strong> Enter a number that is yours. Publishing someone else&rsquo;s number is not allowed; people can report it and it will be hidden.</li>
                     <li><strong>Contact details go in the phone field only.</strong> No phone numbers, e-mail addresses, links, usernames or messaging handles in the price, city or note.</li>
                     <li><strong>Zero tolerance for objectionable content.</strong> No insults, hate, harassment, threats, sexual content, or text about a person rather than the car. Listings with such content are hidden.</li>
@@ -1037,6 +1038,14 @@
                     <li><strong>Message rules:</strong> no insults, harassment, threats, hate or sexual content; no scams &mdash; never ask for, or pay, a deposit, gift cards, codes or card details before seeing a car; no ads. Sharing your own phone number to arrange a viewing is fine. Messages that break these rules may be deleted and the sender blocked from writing.</li>
                 </ul>
 
+                <h3 id="dealers">3e. Dealer accounts (only if you register as a dealer)</h3>
+                <ul>
+                    <li><strong>What we store:</strong> your e-mail address (used to sign in and to recover the account on a new phone), your business name (shown on your cars for sale), and your package status (package, period end). Stored in Google Firebase (EU). The e-mail address is shown to no one.</li>
+                    <li><strong>Payments:</strong> dealer packages are subscriptions billed by Google Play or the App Store. We receive the store&rsquo;s confirmation (order number, package, period) to unlock your package &mdash; never your card or payment details. These records are kept for accounting.</li>
+                    <li><strong>Your cars:</strong> cars you add to <em>My cars</em> are stored under your account (country and plate only). Cars you put up for sale are published like private listings (section 3a), with your business name, and stay up while your package is valid; there is no 30-day limit on them. If the package ends, they are hidden (not deleted) and deleted after 60 days without renewal, with a notice to you before.</li>
+                    <li><strong>Deleting your account:</strong> <em>Settings &rsaquo; Delete dealer account</em> in the app, or see <a href="/delete-account/">carinfoar.com/delete-account</a>, or write to <a href="mailto:support@carinfoar.com">support@carinfoar.com</a>. It deletes your sign-in, dealer record, cars, dealer listings with their photos and contact details, and &ldquo;for sale&rdquo; tags. Deleting the account does not cancel a subscription &mdash; cancel it in the store.</li>
+                </ul>
+
                 <h3>4. Data Storage &amp; Retention</h3>
                 <ul>
                     <li><strong>All app data is stored locally on your device</strong>, except a listing you choose to publish (section 3a), which is kept for at most 30 days, messages you choose to send or receive (section 3d), kept for at most 90 days after the last message (a statistics record of each conversation, with no message text or name, only a short summary sentence, for at most 2 years &mdash; section 3d), and the anonymous app status and messages from us (section 1), deleted after 90 days without use. The anonymous ID itself remains a record in Firebase Authentication that holds only when it was created and last used. (The register copies described in section 3 hold public vehicle data only &mdash; nothing about you.)</li>
@@ -1049,6 +1058,7 @@
                 <h3>5. Your Rights</h3>
                 <ul>
                     <li><strong>Access &amp; Deletion:</strong> View or delete your scan history directly within the app settings. Delete a published listing from <em>My car</em>, or by e-mail if you can no longer reach it (section 3a). <em>Delete my contact details</em> in <em>My car</em> deletes your phone number and name, including the private 6-month copy (section 3a).</li>
+                    <li><strong>Dealer account:</strong> delete it in the app or as described at <a href="/delete-account/">carinfoar.com/delete-account</a> (section 3e).</li>
                     <li><strong>Camera Permission:</strong> You can revoke camera access at any time through your device's system settings.</li>
                     <li><strong>Ad Personalization:</strong> Manage your advertising preferences through your device settings.</li>
                     <li><strong>Messages between buyers and sellers:</strong> <em>Delete my messages</em> in <em>Settings &rsaquo; My messages</em> (section 3d), or write to support@carinfoar.com. To object to the conversation statistics (section 3d), write to the same address.</li>
